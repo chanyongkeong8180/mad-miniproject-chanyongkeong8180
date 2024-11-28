@@ -5,13 +5,13 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 const App = () => {
   let total = 0;
   for (let i = 0; i < datasource.length; i++) {
-      total += datasource[i].price * datasource[i].quantity;
+      total += datasource[i].quantity * datasource[i].price;
   }
   return (
     <View style={styles.container}>
       <TouchableOpacity
           style={[styles.row, {justifyContent: 'center', marginBottom: 20}]}>
-          <Icon name="plus" size={40} color='black' />
+          <Icon name="plus" size={35} color='darkgreen' />
       </TouchableOpacity>
       <FlatList data={datasource} renderItem={renderItem} />
         <View style={[styles.row, {marginTop: 20}]}>
@@ -32,11 +32,11 @@ const renderItem = ({item}) => {
           <Text style={styles.datatext}>$ {item.price.toFixed(2)}</Text>
             <View style={styles.column}>
               <TouchableOpacity
-                  style={{marginBottom: 20}}>
+                  style={{marginBottom: 20, paddingRight: 20}}>
                   <Icon name="pen-to-square" size={35} color='orange' />
               </TouchableOpacity>
               <TouchableOpacity
-                  style={{marginBottom: 20}}>
+                  style={{marginBottom: 20, paddingRight: 20}}>
                   <Icon name="trash-can" size={35} color='red' />
               </TouchableOpacity>
             </View>
@@ -46,9 +46,9 @@ const renderItem = ({item}) => {
 
 const datasource= [
     {name: "Potato Chip", quantity: 1, price: 2.90},
-    {name: "Chocolate Chip Cookies", quantity: 2, price: 5.00},
-    {name: "Thai Teas", quantity: 4, price: 1.50},
-    {name: "Lemon Teas", quantity: 3, price: 1.50}
+    {name: "Chocolate Chip Cookie", quantity: 2, price: 5.00},
+    {name: "Thai Tea", quantity: 4, price: 1.50},
+    {name: "Lemon Tea", quantity: 3, price: 1.50}
 ];
 
 const styles = StyleSheet.create({
@@ -68,14 +68,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
     },
     datatext: {
-        fontSize: 20,
-        flexWrap: 'wrap',
-        width: '25%',
-        marginRight: 20
+        flex: 1,
+        fontSize: 15,
+        marginRight: 10
     },
     totaltext: {
-        fontSize: 40,
+        fontSize: 30,
         fontWeight: 'bold',
-        marginRight: 40
+        marginRight: 20
     }
 });
