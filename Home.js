@@ -8,6 +8,29 @@ const Home = ({navigation}) => {
   for (let i = 0; i < datasource.length; i++) {
       total += datasource[i].quantity * datasource[i].price;
   }
+  const renderItem = ({item, index}) => {
+      return (
+          <View style={[styles.row, {marginTop: 20, marginBottom: 20}]}>
+              <Text style={styles.datatext}>{item.name}</Text>
+              <Text style={styles.datatext}>{item.quantity}</Text>
+              <Text style={styles.datatext}>${item.price.toFixed(2)}</Text>
+              <View style={styles.column}>
+                  <TouchableOpacity
+                      style={{flex: 1, marginBottom: 20}}
+                      onPress={()=> {
+                          navigation.navigate('Edit',
+                              {index:index, name:item.name, quantity:item.quantity, price:item.price});
+                      }}>
+                      <Icon name="pen-to-square" size={35} color='orange' />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                      style={{flex: 1, marginBottom: 20}}>
+                      <Icon name="trash-can" size={35} color='red' />
+                  </TouchableOpacity>
+              </View>
+          </View>
+      );
+    };
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -28,26 +51,6 @@ const Home = ({navigation}) => {
 
 export default Home;
 
-const renderItem = ({item}) => {
-  return (
-      <View style={[styles.row, {marginTop: 20, marginBottom: 20}]}>
-          <Text style={styles.datatext}>{item.name}</Text>
-          <Text style={styles.datatext}>{item.quantity}</Text>
-          <Text style={styles.datatext}>${item.price.toFixed(2)}</Text>
-            <View style={styles.column}>
-              <TouchableOpacity
-                  style={{flex: 1, marginBottom: 20}}>
-                  <Icon name="pen-to-square" size={35} color='orange' />
-              </TouchableOpacity>
-              <TouchableOpacity
-                  style={{flex: 1, marginBottom: 20}}>
-                  <Icon name="trash-can" size={35} color='red' />
-              </TouchableOpacity>
-            </View>
-      </View>
-  );
-};
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         padding: 20,
-        backgroundColor: 'lime',
+        backgroundColor: 'skyblue',
     },
     column: {
         flexDirection: 'column',

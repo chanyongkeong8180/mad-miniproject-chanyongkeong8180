@@ -2,27 +2,27 @@ import React, {useState} from 'react'
 import {View, TextInput, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {datasource} from './Data.js';
 
-const Add = ({navigation}) => {
-    const [name, setName] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [price, setPrice] = useState(1);
+const Edit = ({navigation, route}) => {
+    const [name, setName] = useState(route.params.name);
+    const [quantity, setQuantity] = useState(route.params.quantity);
+    const [price, setPrice] = useState(route.params.price);
     return (
         <View style={styles.container}>
             <View style={{flex: 1}}>
                 <TextInput
                     style={[styles.row, {borderWidth: 1}]}
-                    placeholder="Enter Item"
+                    value={name}
                     onChangeText={(text) => setName(text)}
                 />
                 <TextInput
                     style={[styles.row, {borderWidth: 1}]}
-                    placeholder="Enter Quantity"
+                    value={quantity.toString()}
                     keyboardType="number-pad"
                     onChangeText={(text) => setQuantity(parseInt(text))}
                 />
                 <TextInput
                     style={[styles.row, {borderWidth: 1}]}
-                    placeholder="Enter Price"
+                    value={price.toFixed(2).toString()}
                     keyboardType="decimal-pad"
                     onChangeText={(text) => setPrice(parseFloat(text))}
                 />
@@ -30,21 +30,21 @@ const Add = ({navigation}) => {
             <View style={{marginBottom: 20}}>
                 <TouchableOpacity
                     style={[styles.row, {backgroundColor: 'lime'}]}>
-                    <Text style={styles.buttontext}>Add Item</Text>
+                    <Text style={styles.buttontext}>Confirm Changes</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.row, {backgroundColor: 'red'}]}
                     onPress = {()=>{
                         navigation.navigate("Home")
                     }}>
-                    <Text style={styles.buttontext}>Back To List</Text>
+                    <Text style={styles.buttontext}>Cancel Changes</Text>
                 </TouchableOpacity>
             </View>
         </View>
     );
 }
 
-export default Add;
+export default Edit;
 
 const styles = StyleSheet.create({
     container: {
