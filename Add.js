@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, TextInput, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {View, ScrollView, TextInput, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {datasource} from './Data.js';
 
 const Add = ({navigation}) => {
@@ -8,25 +8,27 @@ const Add = ({navigation}) => {
     const [price, setPrice] = useState(1);
     return (
         <View style={styles.container}>
+            <ScrollView>
             <View style={{flex: 1}}>
                 <TextInput
-                    style={[styles.row, {borderWidth: 1}]}
+                    style={[styles.row, styles.input]}
                     placeholder="Enter Item"
                     onChangeText={(text) => setName(text)}
                 />
                 <TextInput
-                    style={[styles.row, {borderWidth: 1}]}
+                    style={[styles.row, styles.input]}
                     placeholder="Enter Quantity"
                     keyboardType="number-pad"
                     onChangeText={(text) => setQuantity(parseInt(text))}
                 />
                 <TextInput
-                    style={[styles.row, {borderWidth: 1}]}
+                    style={[styles.row, styles.input]}
                     placeholder="Enter Price"
                     keyboardType="decimal-pad"
                     onChangeText={(text) => setPrice(parseFloat(text))}
                 />
             </View>
+            </ScrollView>
             <View style={{marginBottom: 20}}>
                 <TouchableOpacity
                     style={[styles.row, {backgroundColor: 'lime'}]}>
@@ -57,6 +59,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 20,
         padding: 20
+    },
+    input: {
+        fontSize: 20,
+        borderWidth: 1
     },
     buttontext: {
         flex: 1,
