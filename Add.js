@@ -23,7 +23,7 @@ const Add = ({navigation}) => {
                 style={[styles.row, {borderWidth: 1}]}
                 placeholder="Enter Price"
                 keyboardType="decimal-pad"
-                onChangeText={(text) => setPrice(parseInt(text))}
+                onChangeText={(text) => setPrice(parseFloat(text))}
             />
             <View style={{marginTop: 80, marginBottom: 20}}>
                 <TouchableOpacity
