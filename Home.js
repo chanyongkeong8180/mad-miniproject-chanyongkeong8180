@@ -3,7 +3,7 @@ import {View, TouchableOpacity, Text, FlatList, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {datasource} from './Data.js';
 
-const Home = () => {
+const Home = ({navigation}) => {
   let total = 0;
   for (let i = 0; i < datasource.length; i++) {
       total += datasource[i].quantity * datasource[i].price;
@@ -11,7 +11,10 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-          style={[styles.row, {justifyContent: 'center', marginBottom: 20}]}>
+          style={[styles.row, {justifyContent: 'center', marginBottom: 20}]}
+          onPress={()=> {
+            navigation.navigate('Add')
+          }}>
           <Icon name="plus" size={35} color='darkgreen' />
       </TouchableOpacity>
       <FlatList data={datasource} renderItem={renderItem} />
@@ -44,7 +47,6 @@ const renderItem = ({item}) => {
       </View>
   );
 };
-
 
 const styles = StyleSheet.create({
     container: {
