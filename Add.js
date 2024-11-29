@@ -57,12 +57,14 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         justifyContent: 'center',
-        margin: 20,
-        padding: 20
+        padding: 20,
+        marginTop: 20,
+        marginBottom: 20,
+        backgroundColor: 'skyblue'
     },
     input: {
         fontSize: 20,
-        borderWidth: 1
+        borderWidth: 1,
     },
     buttontext: {
         flex: 1,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, } from 'react-native';
+import {View, ScrollView, Text, TextInput, TouchableOpacity, Alert, StyleSheet} from 'react-native';
 import {datasource} from './Data.js';
 
 const Edit = ({navigation, route}) => {
@@ -34,7 +34,23 @@ const Edit = ({navigation, route}) => {
             </ScrollView>
             <View style={{marginBottom: 20}}>
                 <TouchableOpacity
-                    style={[styles.row, {backgroundColor: 'lime'}]}>
+                    style={[styles.row, {backgroundColor: 'lime'}]}
+                    onPress={()=> {
+                        datasource[route.params.index].name = name;
+                        if (quantity <= 0 || price <= 0) {
+                            Alert.alert("Warning",
+                                "Quantity and Price must be more than zero.")
+                        }
+                        if (quantity > 0) {
+                            datasource[route.params.index].quantity = quantity;
+                        }
+                        if (price > 0) {
+                            datasource[route.params.index].price = price;
+                        }
+                        if (quantity > 0 && price > 0) {
+                            navigation.navigate('Home')
+                        }
+                    }}>
                     <Text style={styles.buttontext}>Confirm Changes</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -60,8 +76,10 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         justifyContent: 'center',
-        margin: 20,
-        padding: 20
+        padding: 20,
+        marginTop: 20,
+        marginBottom: 20,
+        backgroundColor: 'skyblue'
     },
     inputtext: {
         fontSize: 20,

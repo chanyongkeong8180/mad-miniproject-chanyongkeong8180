@@ -12,8 +12,8 @@ const Home = ({navigation}) => {
       return (
           <View style={[styles.row, {marginTop: 20, marginBottom: 20}]}>
               <Text style={styles.datatext}>{item.name}</Text>
-              <Text style={styles.datatext}>{item.quantity}</Text>
-              <Text style={styles.datatext}>${item.price.toFixed(2)}</Text>
+              <Text style={styles.datatext}>X {item.quantity}</Text>
+              <Text style={styles.datatext}>$ {item.price.toFixed(2)}</Text>
               <View style={styles.column}>
                   <TouchableOpacity
                       style={{flex: 1, marginBottom: 20}}
@@ -43,7 +43,7 @@ const Home = ({navigation}) => {
       <FlatList data={datasource} renderItem={renderItem} />
         <View style={[styles.row, {marginTop: 20}]}>
             <Text style={styles.totaltext}>Total Price</Text>
-            <Text style={styles.totaltext}>${total.toFixed(2)}</Text>
+            <Text style={styles.totaltext}>$ {total.toFixed(2)}</Text>
         </View>
     </View>
   );
