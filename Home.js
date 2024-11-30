@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, TouchableOpacity, Text, FlatList, StyleSheet} from 'react-native';
+import React, {useState} from 'react'
+import {View, TouchableOpacity, Text, FlatList, Alert, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {datasource} from './Data.js';
 
@@ -8,6 +8,7 @@ const Home = ({navigation}) => {
   for (let i = 0; i < datasource.length; i++) {
       total += datasource[i].quantity * datasource[i].price;
   }
+  const [data, setData] = useState(datasource);
   const renderItem = ({item, index}) => {
       return (
           <View style={[styles.row, {marginTop: 20, marginBottom: 20}]}>
@@ -24,7 +25,15 @@ const Home = ({navigation}) => {
                       <Icon name="pen-to-square" size={35} color='orange' />
                   </TouchableOpacity>
                   <TouchableOpacity
-                      style={{flex: 1, marginBottom: 20}}>
+                      style={{flex: 1, marginBottom: 20}}
+                      onPress={() => {
+                          Alert.alert("Are you sure?",
+                              "Press confirm to delete " +
+                              item.name + " or cancel to keep it.",
+                              [{text: "Confirm", onPress: () => {
+                                      setData(datasource.splice(index,1));
+                                  }}, {text: "Cancel"}])
+                      }}>
                       <Icon name="trash-can" size={35} color='red' />
                   </TouchableOpacity>
               </View>

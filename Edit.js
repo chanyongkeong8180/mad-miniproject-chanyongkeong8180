@@ -21,14 +21,14 @@ const Edit = ({navigation, route}) => {
                     style={[styles.row, styles.input]}
                     value={quantity.toString()}
                     keyboardType="number-pad"
-                    onChangeText={(text) => setQuantity(parseInt(text))}
+                    onChangeText={(text) => setQuantity(parseInt(text) || 0)}
                 />
                 <Text style={[styles.inputtext]}>Enter Price:</Text>
                 <TextInput
                     style={[styles.row, styles.input]}
                     value={price.toFixed(2).toString()}
-                    keyboardType="decimal-pad"
-                    onChangeText={(text) => setPrice(parseFloat(text))}
+                    keyboardType="numeric"
+                    onChangeText={(text) => setPrice(parseFloat(text) || 0)}
                 />
             </View>
             </ScrollView>
@@ -36,9 +36,15 @@ const Edit = ({navigation, route}) => {
                 <TouchableOpacity
                     style={[styles.row, {backgroundColor: 'lime'}]}
                     onPress={()=> {
-                        datasource[route.params.index].name = name;
-                        if (quantity <= 0 || price <= 0) {
-                            Alert.alert("Warning",
+                        if (name === "") {
+                            Alert.alert("Warning!",
+                                "Item name must not be empty.")
+                        }
+                        if (name !== "") {
+                            datasource[route.params.index].name = name;
+                        }
+                        else if (quantity <= 0 || price <= 0) {
+                            Alert.alert("Warning!",
                                 "Quantity and Price must be more than zero.")
                         }
                         if (quantity > 0) {
@@ -47,7 +53,7 @@ const Edit = ({navigation, route}) => {
                         if (price > 0) {
                             datasource[route.params.index].price = price;
                         }
-                        if (quantity > 0 && price > 0) {
+                        if (name !== "" && quantity > 0 && price > 0) {
                             navigation.navigate('Home')
                         }
                     }}>

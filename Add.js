@@ -1,37 +1,55 @@
 import React, {useState} from 'react'
-import {View, ScrollView, TextInput, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {View, ScrollView, TextInput, TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import {datasource} from './Data.js';
 
 const Add = ({navigation}) => {
     const [name, setName] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [price, setPrice] = useState(1);
+    const [quantity, setQuantity] = useState(0);
+    const [price, setPrice] = useState(0);
     return (
         <View style={styles.container}>
             <ScrollView>
             <View style={{flex: 1}}>
+                <Text style={[styles.inputtext]}>Enter Item:</Text>
                 <TextInput
                     style={[styles.row, styles.input]}
-                    placeholder="Enter Item"
                     onChangeText={(text) => setName(text)}
                 />
+                <Text style={[styles.inputtext]}>Enter Quantity:</Text>
                 <TextInput
                     style={[styles.row, styles.input]}
-                    placeholder="Enter Quantity"
+                    value={quantity.toString()}
                     keyboardType="number-pad"
-                    onChangeText={(text) => setQuantity(parseInt(text))}
+                    onChangeText={(text) => setQuantity(parseInt(text) || 0)}
                 />
+                <Text style={[styles.inputtext]}>Enter Price:</Text>
                 <TextInput
                     style={[styles.row, styles.input]}
-                    placeholder="Enter Price"
+                    value={price.toFixed(2).toString()}
                     keyboardType="decimal-pad"
-                    onChangeText={(text) => setPrice(parseFloat(text))}
+                    onChangeText={(text) => setPrice(parseFloat(text) || 0)}
                 />
             </View>
             </ScrollView>
             <View style={{marginBottom: 20}}>
                 <TouchableOpacity
-                    style={[styles.row, {backgroundColor: 'lime'}]}>
+                    style={[styles.row, {backgroundColor: 'lime'}]}
+                    onPress={()=>{
+                        let item = {name:name,
+                            quantity:quantity, price:price}
+                        if (name === "") {
+                            Alert.alert("Warning!",
+                                "Item name must not be empty.")
+                        }
+                        else if (quantity <= 0 || price <= 0) {
+                            Alert.alert("Warning!",
+                                "Quantity and Price must be more than zero.")
+                        }
+                        if (name !== "" && quantity > 0 && price > 0) {
+                            datasource.push(item);
+                            navigation.navigate("Home")
+                        }
+                    }}>
                     <Text style={styles.buttontext}>Add Item</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -61,6 +79,10 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
         backgroundColor: 'skyblue'
+    },
+    inputtext: {
+        fontSize: 20,
+        margin: 20
     },
     input: {
         fontSize: 20,
