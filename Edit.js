@@ -36,11 +36,11 @@ const Edit = ({navigation, route}) => {
                 <TouchableOpacity
                     style={[styles.row, {backgroundColor: 'lime'}]}
                     onPress={()=> {
-                        if (name === "") {
+                        if (name.trim() === "") {
                             Alert.alert("Warning!",
                                 "Item name must not be empty.")
                         }
-                        if (name !== "") {
+                        if (name.trim() !== "") {
                             datasource[route.params.index].name = name;
                         }
                         else if (quantity <= 0 || price <= 0) {
@@ -53,7 +53,7 @@ const Edit = ({navigation, route}) => {
                         if (price > 0) {
                             datasource[route.params.index].price = price;
                         }
-                        if (name !== "" && quantity > 0 && price > 0) {
+                        if (name.trim() !== "" && quantity > 0 && price > 0) {
                             navigation.navigate('Home')
                         }
                     }}>

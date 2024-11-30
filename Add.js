@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, ScrollView, TextInput, TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
+import {View, ScrollView, TextInput, TouchableOpacity, Text, Alert, StyleSheet} from 'react-native';
 import {datasource} from './Data.js';
 
 const Add = ({navigation}) => {
@@ -37,7 +37,7 @@ const Add = ({navigation}) => {
                     onPress={()=>{
                         let item = {name:name,
                             quantity:quantity, price:price}
-                        if (name === "") {
+                        if (name.trim() === "") {
                             Alert.alert("Warning!",
                                 "Item name must not be empty.")
                         }
@@ -45,7 +45,7 @@ const Add = ({navigation}) => {
                             Alert.alert("Warning!",
                                 "Quantity and Price must be more than zero.")
                         }
-                        if (name !== "" && quantity > 0 && price > 0) {
+                        if (name.trim() !== "" && quantity > 0 && price > 0) {
                             datasource.push(item);
                             navigation.navigate("Home")
                         }
