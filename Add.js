@@ -13,6 +13,7 @@ const Add = ({navigation}) => {
                 <Text style={[styles.inputtext]}>Enter Item:</Text>
                 <TextInput
                     style={[styles.row, styles.input]}
+                    placeholder="Item Name"
                     onChangeText={(text) => setName(text)}
                 />
                 <Text style={[styles.inputtext]}>Enter Quantity:</Text>

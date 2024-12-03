@@ -14,6 +14,7 @@ const Edit = ({navigation, route}) => {
                 <TextInput
                     style={[styles.row, styles.input]}
                     value={name}
+                    placeholder="Item Name"
                     onChangeText={(text) => setName(text)}
                 />
                 <Text style={[styles.inputtext]}>Enter Quantity:</Text>
