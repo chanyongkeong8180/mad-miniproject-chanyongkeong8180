@@ -49,6 +49,17 @@ const Home = ({navigation}) => {
           }}>
           <Icon name="plus" size={35} color='darkgreen' />
       </TouchableOpacity>
+        <TouchableOpacity
+            style={[styles.row, {justifyContent: 'center', marginBottom: 20}]}
+            onPress={() => {
+                Alert.alert("Are you sure?",
+                    "Press confirm to delete all items or cancel to keep them.",
+                    [{text: "Confirm", onPress: () => {
+                            setData(datasource.splice(0, datasource.length));
+                        }}, {text: "Cancel"}])
+            }}>
+            <Icon name="minus" size={35} color='darkred' />
+        </TouchableOpacity>
       <FlatList data={datasource} renderItem={renderItem} />
         <View style={[styles.row, {marginTop: 20}]}>
             <Text style={styles.totaltext}>Total Price</Text>
