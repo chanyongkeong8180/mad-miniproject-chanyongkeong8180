@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, TouchableOpacity, Text, FlatList, Alert, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StatusBar, FlatList, Alert, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {datasource} from './Data.js';
 
@@ -42,6 +42,7 @@ const Home = ({navigation}) => {
     };
   return (
     <View style={styles.container}>
+      <StatusBar/>
       <TouchableOpacity
           style={[styles.row, {justifyContent: 'center', marginBottom: 20}]}
           onPress={()=> {
@@ -75,7 +76,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'blue',
-        marginTop: 30
     },
     row: {
         flexDirection: 'row',

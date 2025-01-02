@@ -41,12 +41,12 @@ const Edit = ({navigation, route}) => {
                             Alert.alert("Warning!",
                                 "Item name must not be empty.")
                         }
-                        if (name.trim() !== "") {
-                            datasource[route.params.index].name = name;
-                        }
                         else if (quantity <= 0 || price <= 0) {
                             Alert.alert("Warning!",
                                 "Quantity and Price must be more than zero.")
+                        }
+                        if (name.trim() !== "") {
+                            datasource[route.params.index].name = name;
                         }
                         if (quantity > 0) {
                             datasource[route.params.index].quantity = quantity;
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'blue',
-        marginTop: 30
     },
     row: {
         flexDirection: 'row',
