@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, Text, TouchableOpacity, StatusBar, FlatList, Alert, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StatusBar, FlatList,ToastAndroid, Alert, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {datasource} from './Data.js';
 
@@ -53,13 +53,19 @@ const Home = ({navigation}) => {
         <TouchableOpacity
             style={[styles.row, {justifyContent: 'center', marginBottom: 20}]}
             onPress={() => {
-                Alert.alert("Are you sure?",
-                    "Press confirm to delete all items or cancel to keep them.",
-                    [{text: "Confirm", onPress: () => {
-                            setData(datasource.splice(0, datasource.length));
-                        }}, {text: "Cancel"}])
+                if (datasource.length <= 0) {
+                    ToastAndroid.show("You have nothing to delete.", ToastAndroid.LONG)
+                }
+                else {
+                    Alert.alert("Are you sure?",
+                        "Press confirm to delete all items or cancel to keep them.",
+                        [{text: "Confirm", onPress: () => {
+                                setData(datasource.splice(0, datasource.length));
+                            }}, {text: "Cancel"}])
+                }
+
             }}>
-            <Icon name="minus" size={35} color='darkred' />
+            <Icon name="trash" size={35} color='darkred' />
         </TouchableOpacity>
       <FlatList data={datasource} renderItem={renderItem} />
         <View style={[styles.row, {marginTop: 20}]}>
