@@ -63,7 +63,6 @@ const Home = ({navigation}) => {
                                 setData(datasource.splice(0, datasource.length));
                             }}, {text: "Cancel"}])
                 }
-
             }}>
             <Icon name="trash" size={35} color='darkred' />
         </TouchableOpacity>
